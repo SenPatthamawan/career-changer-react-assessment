@@ -3,13 +3,16 @@ import axios from "axios";
 
 const HomeUser = () => {
     const [employees, setEmployees] = useState([]);
+    const baseURL = "https://jsd5-mock-backend.onrender.com"
+
 
   // Get data from api
   //useEffect fetch data
   useEffect(() => {
     const getData = async () => {
+      const getRoute = "members"
       const response = await axios.get(
-        "https://jsd5-mock-backend.onrender.com/members"
+        `${baseURL}/${getRoute}`
       );
       // set member here
       if (response.status === 200 && response.data) {
