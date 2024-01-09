@@ -4,7 +4,6 @@ import HomeNormal from './HomeNormal';
 import HomeUser from './HomeUser';
 import HomeAdmin from './HomeAdmin';
 import Owner from './Owner';
-import Other from './Other';
 
 import {
   createBrowserRouter,
