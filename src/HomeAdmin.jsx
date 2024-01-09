@@ -96,10 +96,10 @@ const HomeAdmin = () => {
                         <td className="px-6 py-4">
                             <div>
                                 {employee.action}
-                                    <button type="button" className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                                    <button type="button" className="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
                                         onClick={() => removeData(employee.id)}
                                     >  
-                                        DELETE
+                                        Delete
                                     </button>
                             </div>
                         </td>
@@ -122,33 +122,26 @@ const CreateForm = ({createData}) => {
 
   return (
     <>
-        <div>Create User Here</div>
-        <div className="max-w-sm mx-auto">
-        <div className="mb-8">
-            <label htmlFor="name" className="block mt-10 text-sm font-medium text-gray-900 dark:text-white">
-                    Name
-            </label>
-            <input type="text" name="name" placeholder="Name" value={name} onChange={(event) => setName(event.target.value)}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
-        </div>
+    <div className="pl-10 pt-10">Create User Here</div>
+        <div className="flex row p-8 justify-center gap-8">
+            <div className="mb-8">
+                <input type="text" name="name" placeholder="Name" value={name} onChange={(event) => setName(event.target.value)}
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-96 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+            </div>
 
-        <div className="mb-8">
-            <label htmlFor="lastname" className="block text-sm font-medium leading-6 text-gray-900">
-                    Lastname
-            </label>
-            <input type="text" name="lastname" placeholder="Lastname" value={lastname} onChange={(event) => setLastname(event.target.value)}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
-        </div>
+            <div className="mb-8">
+                <input type="text" name="lastname" placeholder="Lastname" value={lastname} onChange={(event) => setLastname(event.target.value)}
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-96 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+            </div>
 
-        <div className="mb-8">
-            <label htmlFor="position" className="block text-sm font-medium leading-6 text-gray-900">
-                    Position
-            </label>
-            <input type="text" name="position" placeholder="Position" value={position} onChange={(event) => setPosition(event.target.value)}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
-        </div>
-        <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" 
+            <div className="mb-8">
+                <input type="text" name="position" placeholder="Position" value={position} onChange={(event) => setPosition(event.target.value)}
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-96 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+            </div>
+            <div className="mb-8">
+                <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" 
                     onClick={() => createData(name, lastname, position)}>Save</button>
+            </div>
         </div>
     </>
   )

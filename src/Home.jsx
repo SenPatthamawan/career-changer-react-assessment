@@ -37,7 +37,7 @@ const DisplayHomeSector = ({sector}) => {
         display = <HomeUser />
     }
     else{
-        display = <div>Please choose home sector above.</div>
+        display = <div></div>
                   
     }
 
@@ -53,13 +53,24 @@ const DisplayTitle = ({sector}) => {
 
     let display = sector;
     if(sector === 'admin'){
-        display = <h1 className="title_home">Generation Thailand Home - Admin Sector</h1>
+        display = (
+        <div className="flex justify-center p-8 w-5/12">
+        <h1 className="align-center text-5xl text-center">Generation Thailand Home - Admin Sector</h1>
+        </div>
+                  )
     }else if(sector === 'user'){
-        display = <h1 className="title_home">Generation Thailand Home - User Sector</h1>
+        display = (
+            <div className="flex justify-center p-8 w-5/12">
+            <h1 className="align-center text-5xl text-center">Generation Thailand Home - User Sector</h1>
+            </div>
+        )
     }
     else{
-        display = <h1 className="title_home">Generation Thailand React - Assessment</h1>
-                  
+        display = (
+            <div className="flex justify-center p-8 w-5/12">
+            <h1 className="align-center text-5xl text-center">Generation Thailand React - Assessment</h1>
+            </div>
+        )
     }
 
     return (
