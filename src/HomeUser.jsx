@@ -26,17 +26,17 @@ const HomeUser = () => {
   return (
     <>
         {/* table */}
-        <div className="relative overflow-x-auto">
-            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <div className="p-8 flex justify-center w-auto relative overflow-x-auto">
+            <table className="rounded-lg w-6/12 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead className="text-center text-sm font-medium text-gray-900 group bg-gradient-to-br from-teal-300 to-lime-300">
                     <tr>
-                        <th scope="col" className="px-6 py-3">
+                        <th scope="col" className="rounded-tl-lg px-6 py-3">
                             Name
                         </th>
                         <th scope="col" className="px-6 py-3">
                             Last Name
                         </th>
-                        <th scope="col" className="px-6 py-3">
+                        <th scope="col" className="rounded-tr-lg px-6 py-3">
                             Position
                         </th>
                     </tr>
@@ -44,10 +44,10 @@ const HomeUser = () => {
                 <tbody>
                 {/* Start loop */}
                 {employees.map((employee) => (
-                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
+                        <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             {employee.name}
-                        </th>
+                        </td>
                         <td className="px-6 py-4">
                             {employee.lastname}
                         </td>

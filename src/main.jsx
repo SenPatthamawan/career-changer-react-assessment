@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import HomeNormal from './HomeNormal';
+import Home from './Home';
 import HomeUser from './HomeUser';
 import HomeAdmin from './HomeAdmin';
 import Owner from './Owner';
@@ -13,7 +13,7 @@ import {
 const router = createBrowserRouter([
     {
       path: '/',
-      element: <HomeNormal />
+      element: <Home />
     },
     {
       path: '/homeuser',

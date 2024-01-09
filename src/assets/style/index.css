@@ -47,15 +47,21 @@ html {
   align-items: center;
 }
 
-.content_home_normal {
+.content_home {
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 116px;
+    padding: 20px 0 20px 0;
 
 }
 
-.title_home_normal {
-    width: 250px;
-    font-size: 25px;
+.title_home {
+    width: 500px;
+    font-size: 45px;
+    display: flex;
+    /* justify-items: center; */
+    align-items: center;
+
+
 }
