@@ -24,13 +24,12 @@ const HomeAdmin = () => {
     }, [reload]);
 
     // Create data to api
-    const createData = async (name, lastname, position) => {
+    const createData = async (formData) => {
         const requestData = {
-        name: name,
-        lastname: lastname,
-        position: position,
+            name: formData.name,
+            lastname: formData.lastname,
+            position: formData.position,
         };
-        console.log(requestData);
         const createRoute = "members"
         const response = await axios.post(
         `${baseURL}/${createRoute}`, requestData
@@ -39,8 +38,6 @@ const HomeAdmin = () => {
         if (response.status === 200) {
         setReload(!reload);
         }
-
-        console.log(response);
     };
 
     // Delete data
@@ -82,8 +79,8 @@ const HomeAdmin = () => {
                 </thead>
                 <tbody>
                 {/* Start loop */}
-                {employees.map((employee) => (
-                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
+                {employees.map((employee, index) => (
+                    <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
                         <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             {employee.name}
                         </td>
@@ -116,33 +113,87 @@ const HomeAdmin = () => {
 
 
 const CreateForm = ({createData}) => {
-    const [name, setName] = useState("");
-    const [lastname, setLastname] = useState("");
-    const [position, setPosition] = useState("");
+    const [formData, setFormData] = useState({
+        name: "",
+        lastname: "",
+        position: "",
+    });
+
+    const [formErrors, setFormErrors] = useState({
+        name: "",
+        lastname: "",
+        position: "",
+    });
+
+    const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const validateForm = () => {
+    let errors = {};
+    let isValid = true;
+
+    if (!formData.name.trim()) {
+      errors.name = "Name is required";
+      isValid = false;
+    }
+
+    if (!formData.lastname.trim()) {
+      errors.lastname = "Lastname is required";
+      isValid = false;
+    }
+
+    if (!formData.position.trim()) {
+      errors.position = "Position is required";
+      isValid = false;
+    }
+
+    setFormErrors(errors);
+    return isValid;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (validateForm()) {
+      // Submit the form data
+      console.log("Form data submitted:", formData);
+      createData(formData);
+    } else {
+      console.log("Form submission failed due to validation errors.");
+    }
+  };
 
   return (
     <>
     <div className="pl-10 pt-10">Create User Here</div>
-        <div className="flex row p-8 justify-center gap-8">
-            <div className="mb-8">
-                <input type="text" name="name" placeholder="Name" value={name} onChange={(event) => setName(event.target.value)}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-96 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
-            </div>
+        <form onSubmit={handleSubmit}>
+            <div className="flex row p-8 justify-center gap-8">
+                <div className="mb-8">
+                    <input type="text" name="name" placeholder="*Name" value={formData.name} onChange={handleInputChange}
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-96 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+                    <span className="text-red-600">{formErrors.name}</span>
+                </div>
 
-            <div className="mb-8">
-                <input type="text" name="lastname" placeholder="Lastname" value={lastname} onChange={(event) => setLastname(event.target.value)}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-96 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
-            </div>
+                <div className="mb-8">
+                    <input type="text" name="lastname" placeholder="*Lastname" value={formData.lastname} onChange={handleInputChange}
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-96 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+                    <span className="text-red-600">{formErrors.lastname}</span>
+                </div>
 
-            <div className="mb-8">
-                <input type="text" name="position" placeholder="Position" value={position} onChange={(event) => setPosition(event.target.value)}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-96 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+                <div className="mb-8">
+                    <input type="text" name="position" placeholder="*Position" value={formData.position} onChange={handleInputChange}
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-96 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+                    <span className="text-red-600">{formErrors.position}</span>
+                </div>
+                <div className="mb-8">
+                    <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        Save
+                    </button>
+                </div>
             </div>
-            <div className="mb-8">
-                <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" 
-                    onClick={() => createData(name, lastname, position)}>Save</button>
-            </div>
-        </div>
+        </form>
     </>
   )
 }
