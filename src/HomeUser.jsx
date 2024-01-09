@@ -1,25 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 
-const HomeUser = () => {
-    const [employees, setEmployees] = useState([]);
-    const baseURL = "https://jsd5-mock-backend.onrender.com"
-
+const HomeUser = ({employees, getData}) => {
 
   // Get data from api
   //useEffect fetch data
   useEffect(() => {
-    const getData = async () => {
-      const getRoute = "members"
-      const response = await axios.get(
-        `${baseURL}/${getRoute}`
-      );
-      // set member here
-      if (response.status === 200 && response.data) {
-        setEmployees([...response.data]);
-      }
-    };
-
     getData();
   }, []);
 

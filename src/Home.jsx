@@ -2,9 +2,24 @@ import React, {useState} from 'react'
 import HomeUser from './HomeUser'
 import HomeAdmin from './HomeAdmin'
 import Layout from './Layout'
+import axios from "axios";
+
 
 const Home = () => {
+    const [employees, setEmployees] = useState([]);
     const [sector, setSector] = useState("");
+    
+    const baseURL = "https://jsd5-mock-backend.onrender.com"
+    const getData = async () => {
+        const getRoute = "members"
+        const response = await axios.get(`${baseURL}/${getRoute}`);
+        // set member here
+        if (response.status === 200 && response.data) {
+        setEmployees([...response.data]);
+        }
+    };
+
+    
   return (
     <Layout>
         <div className="content_home">
@@ -24,17 +39,23 @@ const Home = () => {
                 </span> 
             </button>
         </div>
-        <DisplayHomeSector sector={sector}/>
+        <DisplayHomeSector sector={sector} employees={employees} getData={getData} />
     </Layout>
   )
 }
 
-const DisplayHomeSector = ({sector}) => {
+const DisplayHomeSector = ({sector, employees, getData}) => {
     let display = sector;
     if(sector === 'admin'){
-        display = <HomeAdmin />
+        display = <HomeAdmin 
+                    employees={employees}
+                    getData={getData}
+                  />
     }else if(sector === 'user'){
-        display = <HomeUser />
+        display = <HomeUser 
+                    employees={employees} 
+                    getData={getData} 
+                  />
     }
     else{
         display = <div></div>
